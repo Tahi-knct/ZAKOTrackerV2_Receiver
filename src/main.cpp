@@ -3,21 +3,10 @@
 #include <SPI.h>
 #include <espnow.h>
 
-const uint8_t ConnectDevises_Number = 5;
-
-void GetSensorQuaternion();
-
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-
-unsigned long lastTime = 0;
-unsigned long timerDelay = 2000;
-
-float QuatDataArray[4 * ConnectDevises_Number];
-
 void OnDataRecv(uint8_t* mac_addr, uint8_t* incomingData, uint8_t len) {
   Serial.print("s\t");
   for (int i = 0; i < len; i++) {
-    Serial.print(QuatDataArray[i]);
+    Serial.print(incomingData[i]);
     Serial.print("\t");
   }
   Serial.print("\n");
