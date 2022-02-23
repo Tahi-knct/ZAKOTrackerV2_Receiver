@@ -33,7 +33,6 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* recvData, int len) {
 
 void setup() {
     Serial.begin(115200);
-    WiFi.mode(WIFI_STA);
     if (esp_now_init() != 0) {
         Serial.println("Error initialize ESP-NOW");
         return;
@@ -42,7 +41,9 @@ void setup() {
 #if Mode == Mode_Sender
 
 #elif Mode == Mode_Receiver
-    esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
+    WiFi.mode(WIFI_AP);
+    WiFi.disconnect();
+
     esp_now_register_recv_cb(OnDataRecv);
 
 #else
