@@ -25,6 +25,13 @@ void OnDataRecv(const uint8_t* mac, const uint8_t* recvData, int len) {
             QuatDataArray[i * 4 + 3] = recvData[i * 4 + 4];
         }
     }
+
+    Serial.print("s\t");
+    for (size_t i = 0; i < sizeof(QuatDataArray); i++) {
+        Serial.print(QuatDataArray[i]);
+        Serial.print("\t");
+    }
+    Serial.print("\n");
 }
 
 #else
@@ -55,12 +62,7 @@ void loop() {
 #if Mode == Mode_Sender
 
 #elif Mode == Mode_Receiver
-    Serial.print("s\t");
-    for (size_t i = 0; i < sizeof(QuatDataArray); i++) {
-        Serial.print(QuatDataArray[i]);
-        Serial.print("\t");
-    }
-    Serial.print("\n");
+
 #else
     #error you need select Mode
 #endif
